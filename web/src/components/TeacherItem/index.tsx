@@ -1,37 +1,57 @@
 import React from 'react';
 
 import './styles.css';
-import whatsapp from '../../assets/images/icons/whatsapp.svg'
+import whatsapp from '../../assets/images/icons/whatsapp.svg';
+import api from '../../services/api';
+
+export interface Teacher {
+    avatar: string;
+    bio: string;
+    cost: number;
+    name: string
+    id: number;
+    subject: string;
+    whatsapp: string;
+}
+interface teacherItemProps {
+    teacher: Teacher
+}
 
 
-export default function TeacherItem() {
+const TeacherItem: React.FC<teacherItemProps> = ({teacher}) => {
+
+
+    function handleConnection() {
+        api.post('connections', {
+            user_id: teacher.id,
+        });
+    }
+
     return (
         <article className="teacher-item">
         <header>
-            <img src="https://avatars0.githubusercontent.com/u/36991175?s=460&u=00ea01fdb917ef7b17d6b1091d0d0670c4574049&v=4" alt="jeje"/>
+            <img src={teacher.avatar} alt={teacher.name}/>
             <div>
-                <strong>Jefferson Brandão</strong>
-                <span>Geografia</span>
+                <strong>{teacher.name}</strong>
+                <span>{teacher.subject}</span>
             </div>
         </header>
 
-        <p>
-            Entusiasta das melhores tecnologias de quimica avançada.
-            <br/><br/>
-            Apaixonado por explodir coisas em laboratiroo e por exemplo explodir mais de 200 escolas que nem um doente e ser expulso depois.
-        </p>
+        <p>{teacher.bio}</p>
 
         <footer>
             <p>
                 Preço/hora
-                <strong>R$ 60,00</strong>
+                <strong>R$ {teacher.cost}</strong>
             </p>
-            <button type="button">
+            <a onClick={handleConnection} target="_black" href={`https://wa.me/${teacher.whatsapp}`}>
                 <img src={whatsapp} alt="whatsapp"/>
                 Entrar em contato.
-            </button>
+            </a>
         </footer>
 
     </article>
     )
 }
+
+export default TeacherItem;
