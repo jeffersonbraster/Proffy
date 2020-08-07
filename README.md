@@ -27,8 +27,6 @@
     
 [![License][license-badge]][license-url]
 ![NLW Stats][nlw-badge]
-![Codacy Quality][codacy-badge]
-
 
 </div>
 
@@ -43,7 +41,6 @@
     * [Running](#Running)
 * [Issues](#Issues-)
     * [Report](#Report)
-    * ~~Trouble Shooting~~
 * [Contributing](#Contributing-)
 * [License](#License-)
 
